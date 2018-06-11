@@ -1,0 +1,10 @@
+<br/>
+<div class="container col-md-3">
+  <form #loginForm="ngForm" (ngSubmit)="OnSubmit(loginForm.value, loginForm)">
+    <div class="form-group">
+      <input type="text" class="form-control" id="loginUsername" placeholder="Username">
+      <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+      <input type="submit">
+    </div>
+  </form>
+</div>
