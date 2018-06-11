@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AccountService} from './service/account.service';
+import {HttpClientModule} from '@angular/common/http';
 
 const AppRoutes: Routes = [
   {
@@ -23,9 +25,10 @@ const AppRoutes: Routes = [
     NgbModule,
     RouterModule.forRoot(AppRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

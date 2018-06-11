@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginModel} from '../model/LoginModel';
 import {NgForm} from '@angular/forms';
+import {AccountService} from '../service/account.service';
+import {AppUserMethodResult} from '../model/AppUserMethodResult';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +11,23 @@ import {NgForm} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: LoginModel[]
-  constructor() { }
+  private retVal: AppUserMethodResult;
+  constructor(private accService: AccountService) { }
 
   ngOnInit() {
   }
 
-  OnSubmit(value: LoginModel, form: NgForm ){
-
-    form.reset();
+  onSubmit(value: LoginModel) {
+    this.accService.postMethod(value)
+      .subscribe(
+        data => {
+          this.retVal = data;
+          alert('Uspesno logovanje! Token:' + this.retVal.access_token);
+          // localStorage.setItem(token, this.retVal.access_token);
+        },
+          error => {
+          console.log(error);
+          }
+      );
   }
 }
