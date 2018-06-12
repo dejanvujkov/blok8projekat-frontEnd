@@ -9,7 +9,7 @@ import {RACServiceService} from '../service/racservice.service';
 })
 export class ServiceDetailComponent implements OnInit {
 
-  Service;
+  Service : any;
   Id: number;
   constructor(private racService: RACServiceService, private router: Router, private activatedRoute: ActivatedRoute) {
     activatedRoute.params.subscribe(params => {this.Id = params['Id']; });

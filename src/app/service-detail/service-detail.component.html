@@ -1,13 +1,55 @@
 <br/>
-<div class="container-fluid">
+<div class="container">
+  <!-- upitnik izmedju Service i propertija je operator koji proverava
+       da li je properti definisan. NgForm krene da se izvrsava pre nego sto se podaci
+       o servisu ucitaju sa servera pa angular baca greske da su Service i njegovi prop
+       nedefinisani. operator ? to sprecava
+  -->
   <div class="jumbotron">
-    <h1 class="display-4">{{Service.Name}}</h1>
-    <p class="lead">{{Service.Description}}</p>
+    <h1 class="display-4">{{Service?.Name}}</h1>
+    <p class="lead">{{Service?.Description}}</p>
     <hr class="my-4">
-    <p>Email: {{Service.Email}}</p>
+    <p>Email: {{Service?.Email}}</p>
+  </div>
+  <div class="modal-body row">
+    <div class="col-md-5" >
+      <h4 style="text-align: center">Vehicle</h4>
+      <div class="list-group" *ngFor="let vehicle of Service?.Vehicles">
+        <a class="list-group-item list-group-item-action flex-column align-items-start-active">
+          <div class="d-flex w-100 justify-content-between">
+              <img style="max-height: 80px; max-width: 80px" src="http://xdn.tf.rs/2015/06/17/Fica-Fiat-750-7.jpg">
+              
+            <h5>{{vehicle?.Type}} {{vehicle?.Manifacturer}} {{vehicle?.Model}} {{vehicle?.ProductionYear}}</h5>
+            <small style="color:green">{{vehicle?.Price}}$</small>
+          </div>
+          <p class="mb-1">{{vehicle?.Description}}</p>
+        </a>
+      </div>
+    </div>
+    <!--<div class="col-md-6" style="background-color: blueviolet">
+      <p>PROBA</p>
+    </div>-->
+    <div class="col-md-offset-2 col-md-5" >
+        <h4 style="text-align: center">Branch offices</h4>
+        <div class="list-group" *ngFor="let office of Service?.Offices">
+          <a class="list-group-item list-group-item-action flex-column align-items-start-active">
+            <div class="d-flex w-100 justify-content-between">
+              <img style="max-height: 80px; max-width: 80px" src="http://xdn.tf.rs/2015/06/17/Fica-Fiat-750-7.jpg">
+              <h5>{{office?.Address}}</h5>
+            </div>
+          </a>
+        </div>
+      </div>
   </div>
 
   <h2>Reservate a vehicle</h2>
+  
+  <div class="list-group" *ngFor="let theme of allServices">
+    <a class="list-group-item list-group-item-action flex-column align-items-start-active">
+      <h5>{{service.Name}}</h5>
+      <p class="mb-1">{{service.Description}}</p>
+    </a>
+  </div>
 
 </div>
 
