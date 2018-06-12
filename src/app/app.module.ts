@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountService} from './service/account.service';
 import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
+import { RacserviceComponent } from './racservice/racservice.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
 
 const AppRoutes: Routes = [
   {
@@ -17,7 +19,15 @@ const AppRoutes: Routes = [
   },
   {
     path: 'register',
-    component RegisterComponent
+    component: RegisterComponent
+  },
+  {
+    path: 'services',
+    component: RacserviceComponent
+  },
+  {
+    path: 'services/:Id',
+    component: ServiceDetailComponent
   }
 ];
 
@@ -25,7 +35,9 @@ const AppRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RacserviceComponent,
+    ServiceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +48,7 @@ const AppRoutes: Routes = [
     HttpClientModule,
     HttpClientXsrfModule
   ],
-  providers: [AccountService],
-  bootstrap: [AppComponent]
+  providers: [AccountService, RacserviceComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
