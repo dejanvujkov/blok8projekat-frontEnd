@@ -1,6 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a [routerLink]="['/']" class="nav-item nav-link active">Rent-a-car <span class="sr-only">(current)</span></a>
-  <a [routerLink]="['/login']" class="nav navbar-nav navbar-right">Login</a>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a [routerLink]="['/']" class="navbar-brand">Rent-a-car <span class="sr-only">(current)</span></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a [routerLink]="['/login']" class="nav navbar-nav navbar-right">Login</a></li>
+      <li><a [routerLink]="['/register']" class="nav navbar-nav">Register</a></li>
+    </ul>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginModel} from '../model/LoginModel';
 import {NgForm} from '@angular/forms';
 import {AccountService} from '../service/account.service';
-import {AppUserMethodResult} from '../model/AppUserMethodResult';
+// import {AppUserMethodResult} from '../model/AppUserMethodResult';
 
 @Component({
   selector: 'app-login',
@@ -10,24 +10,15 @@ import {AppUserMethodResult} from '../model/AppUserMethodResult';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: LoginModel[]
-  private retVal: AppUserMethodResult;
+  // loginForm: LoginModel[];
+  // private retVal: AppUserMethodResult;
   constructor(private accService: AccountService) { }
 
   ngOnInit() {
   }
 
-  onSubmit(value: LoginModel) {
-    this.accService.postMethod(value)
-      .subscribe(
-        data => {
-          this.retVal = data;
-          alert('Uspesno logovanje! Token:' + this.retVal.access_token);
-          // localStorage.setItem(token, this.retVal.access_token);
-        },
-          error => {
-          console.log(error);
-          }
-      );
+  onSubmit(value: LoginModel, form: NgForm) {
+    alert('1: username: ' + value.username + ' password: ' + value.password);
+    this.accService.loginUser(value);
   }
 }
