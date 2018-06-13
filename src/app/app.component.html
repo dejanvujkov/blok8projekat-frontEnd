@@ -4,10 +4,12 @@
       <a [routerLink]="['/']" class="navbar-brand">Rent-a-car <span class="sr-only">(current)</span></a>
       <a [routerLink]="['/services']" class="navbar-brand">Services</a>
     </div>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" [hidden]="userLoggedIn()">
       <li><a [routerLink]="['/login']" class="nav navbar-nav navbar-right">Login</a></li>
       <li><a [routerLink]="['/register']" class="nav navbar-nav">Register</a></li>
+      <li><a routerLink="['/adminPage']" class="nav navbar-nav" [hidden]="isLoggedUserAdmin()"></a></li>
     </ul>
+      <a class="nav navbar-nav" [hidden]="!userLoggedIn()">Logout</a>
   </div>
 </nav>
 

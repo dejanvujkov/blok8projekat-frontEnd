@@ -5,9 +5,9 @@
     <br/>
   </div>
   <div class="list-group" *ngFor="let service of allServices">
-    <a [routerLink]="['/services/' + service.Id]" class="list-group-item list-group-item-action flex-column align-items-start-active">
-      <h5>{{service.Name}}</h5>
-      <p class="mb-1">{{service.Description}}</p>
+    <a [routerLink]="['/services/' + service?.Id]" class="list-group-item list-group-item-action flex-column align-items-start-active">
+      <h5>{{service?.Name}}</h5>
+      <p class="mb-1">{{service?.Description}}</p>
     </a>
   </div>
 </div>

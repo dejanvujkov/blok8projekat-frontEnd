@@ -7,7 +7,6 @@ export class ServiceModel {
   Offices: object;
   Vehicles: object;
 
-  // TODO izmenuti konstruktor
   constructor(id: string, name: string, image: string, description: string, email: string) {
     this.Id = id;
     this.Name = name;

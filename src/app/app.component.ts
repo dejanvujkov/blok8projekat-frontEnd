@@ -7,5 +7,21 @@ import { Component } from '@angular/core';
 
 })
 export class AppComponent {
+
+  constructor() {
+  }
   title = 'app';
+
+  userLoggedIn() {
+    return localStorage.jwt;
+  }
+
+  isLoggedUserAdmin() {
+    return localStorage.role === 'Admin';
+  }
+
+  Logout() {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('role');
+  }
 }

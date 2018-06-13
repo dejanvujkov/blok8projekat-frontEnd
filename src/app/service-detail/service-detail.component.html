@@ -4,6 +4,7 @@
        da li je properti definisan. NgForm krene da se izvrsava pre nego sto se podaci
        o servisu ucitaju sa servera pa angular baca greske da su Service i njegovi prop
        nedefinisani. operator ? to sprecava
+       ok
   -->
   <div class="jumbotron">
     <h1 class="display-4">{{Service?.Name}}</h1>
@@ -13,43 +14,62 @@
   </div>
   <div class="modal-body row">
     <div class="col-md-5" >
-      <h4 style="text-align: center">Vehicle</h4>
+      <h4 style="text-align: center">Vehicles</h4>
       <div class="list-group" *ngFor="let vehicle of Service?.Vehicles">
         <a class="list-group-item list-group-item-action flex-column align-items-start-active">
           <div class="d-flex w-100 justify-content-between">
-              <img style="max-height: 80px; max-width: 80px" src="http://xdn.tf.rs/2015/06/17/Fica-Fiat-750-7.jpg">
-              
+              <img style="max-height: 80px; max-width: 80px" src="{{vehicle?.ImagePath}}">
+
             <h5>{{vehicle?.Type}} {{vehicle?.Manifacturer}} {{vehicle?.Model}} {{vehicle?.ProductionYear}}</h5>
             <small style="color:green">{{vehicle?.Price}}$</small>
+            <hr/>
           </div>
           <p class="mb-1">{{vehicle?.Description}}</p>
         </a>
       </div>
     </div>
-    <!--<div class="col-md-6" style="background-color: blueviolet">
-      <p>PROBA</p>
-    </div>-->
     <div class="col-md-offset-2 col-md-5" >
         <h4 style="text-align: center">Branch offices</h4>
         <div class="list-group" *ngFor="let office of Service?.Offices">
           <a class="list-group-item list-group-item-action flex-column align-items-start-active">
             <div class="d-flex w-100 justify-content-between">
-              <img style="max-height: 80px; max-width: 80px" src="http://xdn.tf.rs/2015/06/17/Fica-Fiat-750-7.jpg">
-              <h5>{{office?.Address}}</h5>
+              <img style="max-height: 80px; max-width: 80px" src="{{office?.ImagePath}}">
+              <h5>Adress: {{office?.Address}}</h5>
             </div>
           </a>
         </div>
       </div>
   </div>
-
-  <h2>Reservate a vehicle</h2>
-  
+  <!--Za sta je ovo>-->
   <div class="list-group" *ngFor="let theme of allServices">
     <a class="list-group-item list-group-item-action flex-column align-items-start-active">
-      <h5>{{service.Name}}</h5>
-      <p class="mb-1">{{service.Description}}</p>
+      <h5>{{theme.Name}}</h5>
+      <p class="mb-1">{{theme.Description}}</p>
     </a>
   </div>
 
+  <!--Nemam pojma o cemu se ovde radi ali radi!!!!-->
+  <div [hidden]="isUserLoggedIn()">
+    <hr/>
+    <h2>Make a Reservation</h2>
+    <small>Click on date to select the starting date, then on another to select the date of returning vehicle</small>
+    <br/>
+    <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+    </ngb-datepicker>
+
+    <ng-template #t let-date="date" let-focused="focused">
+  <span class="custom-day"
+        [class.focused]="focused"
+        [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+        [class.faded]="isHovered(date) || isInside(date)"
+        (mouseenter)="hoveredDate = date"
+        (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+    </ng-template>
+
+    <hr>
+    <button type="submit" class="btn-primary" (click)="makeReservation()">Submit</button>
+  </div>
 </div>
 

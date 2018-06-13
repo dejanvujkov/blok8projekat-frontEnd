@@ -1,16 +1,18 @@
 ///<reference path="register/register.component.ts"/>
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AccountService} from './service/account.service';
-import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
+import { AccountService} from './service/account.service';
+import { HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { RacserviceComponent } from './racservice/racservice.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
+import { AdminComponent } from './admin/admin.component';
+
 
 const AppRoutes: Routes = [
   {
@@ -28,6 +30,10 @@ const AppRoutes: Routes = [
   {
     path: 'services/:Id',
     component: ServiceDetailComponent
+  },
+  {
+    path: 'adminPage',
+    component: AdminComponent
   }
 ];
 
@@ -37,11 +43,12 @@ const AppRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     RacserviceComponent,
-    ServiceDetailComponent
+    ServiceDetailComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
-    NgbModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(AppRoutes),
     FormsModule,
     ReactiveFormsModule,

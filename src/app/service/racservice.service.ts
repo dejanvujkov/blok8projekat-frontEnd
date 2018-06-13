@@ -9,7 +9,7 @@ export class RACServiceService {
 
   constructor(private client: HttpClient) {  }
   getAllSerivices() {
-   return this.client.get('http://localhost:51680/service/getAll') as Observable<any>;
+   return this.client.get('http://localhost:51680/service/getAllApprovedServices') as Observable<any>;
   }
   getService(Id: number) {
     return this.client.get('http://localhost:51680/service/getDetails?id=' + Id) as Observable<any>;
