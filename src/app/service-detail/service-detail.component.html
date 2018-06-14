@@ -21,7 +21,7 @@
               <img style="max-height: 80px; max-width: 80px" src="{{vehicle?.ImagePath}}">
 
             <h5>{{vehicle?.Type}} {{vehicle?.Manifacturer}} {{vehicle?.Model}} {{vehicle?.ProductionYear}}</h5>
-            <small style="color:green">{{vehicle?.Price}}$</small>
+            <small style="color:green">{{vehicle?.Price}}$/h</small>
             <hr/>
           </div>
           <p class="mb-1">{{vehicle?.Description}}</p>
@@ -39,13 +39,6 @@
           </a>
         </div>
       </div>
-  </div>
-  <!--Za sta je ovo>-->
-  <div class="list-group" *ngFor="let theme of allServices">
-    <a class="list-group-item list-group-item-action flex-column align-items-start-active">
-      <h5>{{theme.Name}}</h5>
-      <p class="mb-1">{{theme.Description}}</p>
-    </a>
   </div>
 
   <!--Nemam pojma o cemu se ovde radi ali radi!!!!-->

@@ -20,7 +20,7 @@ export class AppComponent {
     return localStorage.role === 'Admin';
   }
 
-  Logout() {
+  logout() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('role');
   }

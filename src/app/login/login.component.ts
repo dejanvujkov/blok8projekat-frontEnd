@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(value: LoginModel, form: NgForm) {
-    alert('1: username: ' + value.username + ' password: ' + value.password);
     this.accService.loginUser(value);
   }
 }

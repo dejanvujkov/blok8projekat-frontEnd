@@ -1,3 +1,35 @@
-<p>
-  admin works!
-</p>
+<ngb-tabset [justify]="currentJustify">
+  <ngb-tab title="Approve New Service">
+    <ng-template ngbTabContent>
+      <div class="list-group" *ngFor="let service of unapprovedServices">
+        <div class="list-group-item">
+          <h5>{{service?.Name}}</h5>
+          <small>{{service?.Description}}</small>
+          <br/>
+          <input type="submit" value="Approve" class="btn-primary" (click)="ApproveService(service)">
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="List of Managers">
+    <ng-template ngbTabContent>
+      <p>
+        tab works!
+      </p>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Approve New Clients">
+    <ng-template ngbTabContent>
+      <div class="list-group" *ngFor="let user of allUnapprovedUsersList">
+        <div class="list-group-item">
+          <h5>Name and surname</h5>
+          <p>{{user.Name}} {{user.Surname}}</p>
+          <img src="{{user.ImagePath}}">
+          <br/>
+          <input type="button" class="btn-primary" value="Approve" (click)="ApproveUser(user)">
+          <input type="button" value="Decilne" class="btn-default">
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

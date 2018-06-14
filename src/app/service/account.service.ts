@@ -25,13 +25,8 @@ export class AccountService {
           const decodedJwtJson = window.atob(jwtData);
           const decodedJwt = JSON.parse(decodedJwtJson);
           const role = decodedJwt.role;
-
           localStorage.setItem('jwt', jwt);
           localStorage.setItem('role', role);
-
-          //console.log('token: ' + jwt);
-          //console.log('role: ' + role);
-
           return decodedJwt;
         },
         error1 => {
@@ -42,7 +37,6 @@ export class AccountService {
   }
 
   registerUser(user: RegisterModel) {
-    alert(user.Username + ' ' + user.Password);
     let header = new HttpHeaders();
     header = header.append('Content-type', 'application/json');
     const retval = this.client.post('http://localhost:51680/api/Account/Register', user) as Observable<any>;
