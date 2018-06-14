@@ -25,8 +25,10 @@ export class AccountService {
           const decodedJwtJson = window.atob(jwtData);
           const decodedJwt = JSON.parse(decodedJwtJson);
           const role = decodedJwt.role;
+          const username = decodedJwt.username;
           localStorage.setItem('jwt', jwt);
           localStorage.setItem('role', role);
+          localStorage.setItem('username', username);
           return decodedJwt;
         },
         error1 => {

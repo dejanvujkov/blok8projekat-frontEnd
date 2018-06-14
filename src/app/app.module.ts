@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { RacserviceComponent } from './racservice/racservice.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { AdminComponent } from './admin/admin.component';
+import { ReservationService } from './service/reservation.service';
 
 
 const AppRoutes: Routes = [
@@ -55,7 +56,7 @@ const AppRoutes: Routes = [
     HttpClientModule,
     HttpClientXsrfModule
   ],
-  providers: [AccountService, RacserviceComponent],
+  providers: [ReservationService, AccountService, RacserviceComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
