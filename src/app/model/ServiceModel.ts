@@ -1,5 +1,5 @@
 export class ServiceModel {
-  Id: string;
+  Id: number;
   Name: string;
   ImagePath: string;
   Description: string;
@@ -7,7 +7,7 @@ export class ServiceModel {
   Offices: object;
   Vehicles: object;
 
-  constructor(id: string, name: string, image: string, description: string, email: string) {
+  constructor(id: number, name: string, image: string, description: string, email: string) {
     this.Id = id;
     this.Name = name;
     this.ImagePath = image;

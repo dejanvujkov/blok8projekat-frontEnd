@@ -19,8 +19,7 @@ export class RACServiceService {
     return this.client.get('http://localhost:51680/service/getNonApproved') as Observable<any>;
   }
   getManagers() {
-    // TODO izmenuti rutu
-    return this.client.get('http://localhost:51680/service/getNonApproved') as Observable<any>;
+    return this.client.get('http://localhost:51680/user/getAllManagers') as Observable<any>;
   }
 
   getAllUnapprovedUsers() {

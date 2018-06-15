@@ -13,12 +13,17 @@ import { RacserviceComponent } from './racservice/racservice.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { AdminComponent } from './admin/admin.component';
 import { ReservationService } from './service/reservation.service';
+import { UserPageComponent } from './user-page/user-page.component';
 
 
 const AppRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'account',
+    component: UserPageComponent
   },
   {
     path: 'register',
@@ -45,7 +50,8 @@ const AppRoutes: Routes = [
     RegisterComponent,
     RacserviceComponent,
     ServiceDetailComponent,
-    AdminComponent
+    AdminComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

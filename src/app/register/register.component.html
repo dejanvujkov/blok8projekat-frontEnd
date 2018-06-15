@@ -6,22 +6,22 @@
   </div>
   <form #registrationForm="ngForm" (ngSubmit)="onSubmitRegistration(registrationForm.value, registrationForm)">
     <div class="form-group">
-      <input name = "Email" ngModel type="email" class="form-control" placeholder="Email">
+      <input name = "Email" ngModel type="email" class="form-control" placeholder="Email" ngbTooltip="Enter valid email address" placement="top">
     </div>
     <div class="form-group">
-      <input name="Password" ngModel type="password" class="form-control" placeholder="Password">
+      <input name="Password" ngModel type="password" class="form-control" placeholder="Password" ngbTooltip="Minimum 6 characters, minimum 1 uppercase, minimum 1 number and 1 special character(_?~!@#$)">
     </div>
     <div class="form-group">
-      <input name="ConfirmPassword" ngModel type="password" class="form-control" placeholder="Confirm password">
+      <input name="ConfirmPassword" ngModel type="password" class="form-control" placeholder="Confirm password" ngbTooltip="Type again">
     </div>
     <div class="form-group">
-      <input name="Name" ngModel type="text" class="form-control" placeholder="Name">
+      <input name="Name" ngModel type="text" class="form-control" placeholder="Name" ngbTooltip="Enter your name">
     </div>
     <div class="form-group">
-      <input name="Surname" ngModel type="text" class="form-control" placeholder="Surname">
+      <input name="Surname" ngModel type="text" class="form-control" placeholder="Surname" ngbTooltip="Now your surname">
     </div>
     <div class="form-group">
-      <input name="Username" ngModel type="text" class="form-control" placeholder="Username">
+      <input name="Username" ngModel type="text" class="form-control" placeholder="Username" ngbTooltip="And desired username">
     </div>
     <div class="form-group"></div>
     <div class="form-group">

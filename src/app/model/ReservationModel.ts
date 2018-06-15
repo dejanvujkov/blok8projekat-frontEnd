@@ -7,4 +7,3 @@ export class ReservationModel {
     TakeAwayBranchOfficeId: number;
     ReturnBranchOfficeId: number;
   }
-  

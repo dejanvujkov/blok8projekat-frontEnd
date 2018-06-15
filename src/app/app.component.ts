@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {AccountService} from './service/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(private acc: AccountService) {
   }
   title = 'app';
 
@@ -23,5 +25,8 @@ export class AppComponent {
   logout() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('role');
+    localStorage.removeItem('username');
+    this.acc.user = null;
+    this.acc.Logout();
   }
 }

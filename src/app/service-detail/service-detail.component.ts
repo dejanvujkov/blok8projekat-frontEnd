@@ -74,36 +74,34 @@ export class ServiceDetailComponent implements OnInit {
     );
   }
 
-  onVehicleListItemClick(i:number, list: HTMLDivElement ){
-    //console.log("aaaa: "  list.children[i].style.background);
-    (list.children[i] as HTMLDivElement).style.background = "LightBlue";
-    for(let child of list.children){
-      if(child != list.children[i]){
-        child.style.background = "";
+  onVehicleListItemClick(i: number, list ) {
+    (list.children[i] as HTMLDivElement).style.background = 'LightBlue';
+    for (const child of list.children) {
+      if (child !== list.children[i]) {
+        child.style.background = '';
       }
     }
 
     this.selectedVehicleId = this.Service.Vehicles[i].Id;
   }
 
-  onBranchOfficeFromListItemClick(i:number, list: HTMLDivElement ){
-    console.log("aaaa: " +  (list.children[i] as HTMLDivElement).style.background);
-    (list.children[i] as HTMLDivElement).style.background = "LightBlue";
-    for(let child of list.children){
-      if(child != list.children[i]){
-        child.style.background = "";
+  onBranchOfficeFromListItemClick(i: number, list) {
+    (list.children[i] as HTMLDivElement).style.background = 'LightBlue';
+    for( const child of list.children) {
+      if (child !== list.children[i]) {
+        child.style.background = '';
       }
     }
 
     this.selectedBranchOfficeFromId = this.Service.Offices[i].Id;
   }
 
-  onBranchOfficeToListItemClick(i:number, list: HTMLDivElement ){
-    console.log("aaaa: " +  (list.children[i] as HTMLDivElement).style.background);
-    (list.children[i] as HTMLDivElement).style.background = "LightBlue";
-    for(let child of list.children){
-      if(child != list.children[i]){
-        child.style.background = "";
+  onBranchOfficeToListItemClick(i: number, list) {
+    console.log('aaaa: ' +  (list.children[i] as HTMLDivElement).style.background);
+    (list.children[i] as HTMLDivElement).style.background = 'LightBlue';
+    for (const child of list.children) {
+      if (child !== list.children[i]) {
+        child.style.background = '';
       }
     }
 
@@ -131,9 +129,8 @@ export class ServiceDetailComponent implements OnInit {
   isTo = date => equals(date, this.toDate);
 
   makeReservation() {
-    alert('from: ' + this.fromDate.day + 'to: ' + this.toDate.day + ' in ' + this.toDate.month);
-    
-    let reservation : ReservationModel = new ReservationModel();
+
+    const reservation: ReservationModel = new ReservationModel();
     reservation.ServiceId = this.Service.Id;
     reservation.ReturnBranchOfficeId = this.selectedBranchOfficeToId
     reservation.TakeAwayBranchOfficeId = this.selectedBranchOfficeFromId;
@@ -142,21 +139,14 @@ export class ServiceDetailComponent implements OnInit {
     reservation.UserId = 1;
     reservation.VehicleId = this.selectedVehicleId;
 
-    let retVal = this.reservationService.addReservation(reservation);
+    const retVal = this.reservationService.addReservation(reservation);
     retVal.subscribe(
       result => {
-        console.log('success reservation');
+        alert('Success reservation');
       },
       err => {
-        console.log(err);
+        alert('Can\'t make a reservation');
       }
     );
-
-    /*
-    fromDate: NgbDateStruct;
-  toDate: NgbDateStruct;
-  hoveredDate: NgbDateStruct;
-  selectedVehicleId: number;
-  selectedBranchOfficeId: number;*/
   }
 }

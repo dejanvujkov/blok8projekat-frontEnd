@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RACServiceService} from '../service/racservice.service';
+import {ServiceModel} from '../model/ServiceModel';
 
 @Component({
   selector: 'app-admin',
@@ -12,12 +13,13 @@ export class AdminComponent implements OnInit {
   managersList;
   allUnapprovedUsersList;
   constructor(private racService: RACServiceService) {
-    this.loadUnapprovedServices();
-    this.loadManagers();
-    this.loadAllUsers();
+
   }
 
   ngOnInit() {
+    this.loadUnapprovedServices();
+    this.loadManagers();
+    this.loadAllUsers();
   }
 
   loadUnapprovedServices() {
@@ -33,7 +35,16 @@ export class AdminComponent implements OnInit {
   }
 
   loadManagers() {
-    // TODO load Managers
+    const retVal =  this.racService.getManagers();
+    retVal.subscribe(
+      result => {
+        console.log('success - managers');
+        this.managersList = result;
+      },
+      err => {
+        console.log('error - managers');
+      }
+    );
   }
 
   loadAllUsers() {
@@ -48,8 +59,10 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  ApproveService(service) {
+  // TODO refresh prikaza kako se stisne dugme
+  ApproveService(service, i) {
     this.racService.approveService(service);
+    this.unapprovedServices.removeAt(i);
   }
 
   ApproveUser(user) {

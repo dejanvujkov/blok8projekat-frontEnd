@@ -19,7 +19,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmitRegistration(value: RegisterModel, form: NgForm){
     this.accountService.registerUser(value);
-    // form.reset();
   }
 
 }

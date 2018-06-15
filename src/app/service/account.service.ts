@@ -8,7 +8,7 @@ import {RegisterModel} from '../model/RegisterModel';
   providedIn: 'root'
 })
 export class AccountService {
-
+  user: any;
   constructor(private client: HttpClient) {
   }
 
@@ -25,14 +25,14 @@ export class AccountService {
           const decodedJwtJson = window.atob(jwtData);
           const decodedJwt = JSON.parse(decodedJwtJson);
           const role = decodedJwt.role;
-          const username = decodedJwt.username;
+          const username = decodedJwt.nameid;
           localStorage.setItem('jwt', jwt);
           localStorage.setItem('role', role);
           localStorage.setItem('username', username);
           return decodedJwt;
         },
         error1 => {
-          console.log('Error occurend in login');
+          alert('The username or password is incorrect');
         }
       );
     }
@@ -45,12 +45,29 @@ export class AccountService {
 
     retval.subscribe(
       result => {
+        alert('Whoho! Registration complete, go ahaid ahead and login!');
         return result;
       },
       err => {
-        console.log('error occured in registration');
+        alert('Error during reservation. Please check if all fields are filled correctly');
         return err;
       }
     );
+  }
+
+  getAccountDetails(username: string) {
+    const retVal = this.client.get('http://localhost:51680/user/getUserDetails?username=' + username) as Observable<any>;
+    retVal.subscribe(
+      result => {
+        this.user = result;
+      },
+      err => {
+        alert('Error getting user');
+      }
+    );
+  }
+
+  Logout() {
+    // TODO pozvati logout na back-endu
   }
 }
