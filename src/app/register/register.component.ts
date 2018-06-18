@@ -11,13 +11,13 @@ import {RegisterModel} from '../model/RegisterModel';
   providers: [AccountService]
 })
 export class RegisterComponent implements OnInit {
-  registerForm: RegisterModel[]
+  registerForm: RegisterModel[];
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
   }
 
-  onSubmitRegistration(value: RegisterModel, form: NgForm){
+  onSubmitRegistration(value: RegisterModel, form: NgForm) {
     this.accountService.registerUser(value);
   }
 

@@ -3,13 +3,14 @@ import {HttpClient, HttpHandler, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {LoginModel} from '../model/LoginModel';
 import {RegisterModel} from '../model/RegisterModel';
+import {Global} from '../global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
   user: any;
-  constructor(private client: HttpClient) {
+  constructor(private client: HttpClient, private global: Global) {
   }
 
   loginUser(user: LoginModel) {
@@ -17,7 +18,7 @@ export class AccountService {
     header = header.append('Content-type', 'application/x-www-form-urlencoded');
 
     if (!localStorage.jwt) {
-      const retVal = this.client.post('http://localhost:51680/oauth/token', 'username=' + user.username + '&password=' + user.password + '&grant_type=password', {'headers': header}) as Observable<any>;
+      const retVal = this.client.post(this.global.address + 'oauth/token', 'username=' + user.username + '&password=' + user.password + '&grant_type=password', {'headers': header}) as Observable<any>;
       retVal.subscribe(
         result => {
           const jwt = result.access_token;
@@ -41,11 +42,11 @@ export class AccountService {
   registerUser(user: RegisterModel) {
     let header = new HttpHeaders();
     header = header.append('Content-type', 'application/json');
-    const retval = this.client.post('http://localhost:51680/api/Account/Register', user) as Observable<any>;
+    const retval = this.client.post(this.global.address + 'api/Account/Register', user) as Observable<any>;
 
     retval.subscribe(
       result => {
-        alert('Whoho! Registration complete, go ahaid ahead and login!');
+        alert('Whoho! Registration complete, go ahead and login!');
         return result;
       },
       err => {
@@ -56,7 +57,7 @@ export class AccountService {
   }
 
   getAccountDetails(username: string) {
-    const retVal = this.client.get('http://localhost:51680/user/getUserDetails?username=' + username) as Observable<any>;
+    const retVal = this.client.get(this.global.address + 'user/getUserDetails?username=' + username) as Observable<any>;
     retVal.subscribe(
       result => {
         this.user = result;
@@ -67,7 +68,18 @@ export class AccountService {
     );
   }
 
-  Logout() {
-    // TODO pozvati logout na back-endu
+  Logout(user) {
+    let header = new HttpHeaders();
+    header = header.append('Content-type', 'application/json');
+    // TODO sta se ovde prosledjuje kao parametar?
+    const retVal = this.client.post(this.global.address + 'api/Account/Logout', user);
+    retVal.subscribe(
+      result => {
+        return result;
+      },
+      err => {
+        alert('Error during logging out');
+      }
+    );
   }
 }

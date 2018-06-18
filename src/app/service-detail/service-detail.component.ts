@@ -132,7 +132,7 @@ export class ServiceDetailComponent implements OnInit {
 
     const reservation: ReservationModel = new ReservationModel();
     reservation.ServiceId = this.Service.Id;
-    reservation.ReturnBranchOfficeId = this.selectedBranchOfficeToId
+    reservation.ReturnBranchOfficeId = this.selectedBranchOfficeToId;
     reservation.TakeAwayBranchOfficeId = this.selectedBranchOfficeFromId;
     reservation.TimeTo = new Date(this.toDate.year, this.toDate.month - 1, this.toDate.day + 1);
     reservation.TimeFrom = new Date(this.fromDate.year, this.fromDate.month - 1, this.fromDate.day + 1);

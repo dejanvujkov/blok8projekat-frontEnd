@@ -14,6 +14,7 @@ import { ServiceDetailComponent } from './service-detail/service-detail.componen
 import { AdminComponent } from './admin/admin.component';
 import { ReservationService } from './service/reservation.service';
 import { UserPageComponent } from './user-page/user-page.component';
+import {Global} from './global';
 
 
 const AppRoutes: Routes = [
@@ -51,7 +52,7 @@ const AppRoutes: Routes = [
     RacserviceComponent,
     ServiceDetailComponent,
     AdminComponent,
-    UserPageComponent
+    UserPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +63,7 @@ const AppRoutes: Routes = [
     HttpClientModule,
     HttpClientXsrfModule
   ],
-  providers: [ReservationService, AccountService, RacserviceComponent],
+  providers: [ReservationService, AccountService, RacserviceComponent, Global],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

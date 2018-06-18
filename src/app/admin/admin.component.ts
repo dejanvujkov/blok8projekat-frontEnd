@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
         this.unapprovedServices = result;
       },
       err => {
-        console.log('Erro durin getting unapproved services');
+        console.log('Error during getting unapproved services');
       }
     );
   }
@@ -38,7 +38,6 @@ export class AdminComponent implements OnInit {
     const retVal =  this.racService.getManagers();
     retVal.subscribe(
       result => {
-        console.log('success - managers');
         this.managersList = result;
       },
       err => {
@@ -67,5 +66,9 @@ export class AdminComponent implements OnInit {
 
   ApproveUser(user) {
     this.racService.approveUser(user);
+  }
+
+  BlockManager(manager) {
+    this.racService.blockManager(manager.AppUser);
   }
 }

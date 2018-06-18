@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {a} from '@angular/core/src/render3';
+import {Global} from '../global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RACServiceService {
 
-  constructor(private client: HttpClient) {  }
-  getAllSerivices() {
-   return this.client.get('http://localhost:51680/service/getAllApprovedServices') as Observable<any>;
+  constructor(private client: HttpClient, private global: Global) {  }
+  getAllServices() {
+   return this.client.get(this.global.address + 'service/getAllApprovedServices') as Observable<any>;
   }
   getService(Id: number) {
-    return this.client.get('http://localhost:51680/service/getDetails?id=' + Id) as Observable<any>;
+    return this.client.get(this.global.address + 'service/getDetails?id=' + Id) as Observable<any>;
   }
   getUnapprovedServices() {
-    return this.client.get('http://localhost:51680/service/getNonApproved') as Observable<any>;
+    return this.client.get(this.global.address + 'service/getNonApproved') as Observable<any>;
   }
   getManagers() {
-    return this.client.get('http://localhost:51680/user/getAllManagers') as Observable<any>;
+    return this.client.get(this.global.address + 'user/getAllManagers') as Observable<any>;
   }
 
   getAllUnapprovedUsers() {
-    return this.client.get('http://localhost:51680/user/getAllUnapproved') as Observable<any>;
+    return this.client.get(this.global.address + 'user/getAllUnapproved') as Observable<any>;
   }
 
   approveUser(user) {
     let header = new HttpHeaders();
     header = header.append('Content-type', 'application/json');
-    const retVal = this.client.put('http://localhost:51680/user/approve', user);
+    const retVal = this.client.put(this.global.address + 'user/approve', user) as Observable<any>;
     retVal.subscribe(
       result => {
         return result;
@@ -42,13 +42,28 @@ export class RACServiceService {
   approveService(service) {
     let header = new HttpHeaders();
     header = header.append('Content-type', 'application/json');
-    const retVal = this.client.put('http://localhost:51680/service/approve', service);
+    const retVal = this.client.put(this.global.address + 'service/approve', service) as Observable<any>;
     retVal.subscribe(
       result => {
         return result;
       },
       err => {
         console.log('error in approving service');
+      }
+    );
+  }
+
+  blockManager(manager) {
+    let header = new HttpHeaders();
+    header = header.append('Content-type', 'application/json');
+    const retVal = this.client.put(this.global.address + 'user/blockManager', manager) as Observable<any>;
+    retVal.subscribe(
+      result => {
+        alert('Manager ' + manager.Id + ' blocked!');
+        return result;
+      },
+      err => {
+        alert('error in blocking manager');
       }
     );
   }

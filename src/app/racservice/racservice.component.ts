@@ -22,7 +22,7 @@ export class RacserviceComponent implements OnInit {
 
   getAllRACServices() {
 
-    const x = this.racService.getAllSerivices();
+    const x = this.racService.getAllServices();
     x.subscribe(
       result => {
         this.allServices = result;

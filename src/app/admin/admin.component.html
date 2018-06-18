@@ -13,10 +13,7 @@
   </ngb-tab>
   <ngb-tab title="List of Managers">
     <ng-template ngbTabContent>
-      <p>
-        </p>
-
-      <div class="list-group" *ngFor="let manager of managersList; index as i">
+      <div class="list-group" *ngFor="let manager of managersList;">
         <div class="list-group-item">
           <h5>{{manager?.UserName}}</h5>
           <p>
@@ -25,7 +22,7 @@
           <img src="">
           <small>contact: {{manager?.Email}}</small>
           <br/>
-          <input type="submit" value="Block" class="btn-primary" (click)="ApproveService(service, i)">
+          <input type="submit" value="Block" class="btn-primary" (click)="BlockManager(manager)">
         </div>
       </div>
 
