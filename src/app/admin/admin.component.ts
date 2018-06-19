@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RACServiceService} from '../service/racservice.service';
 import {ServiceModel} from '../model/ServiceModel';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +13,8 @@ export class AdminComponent implements OnInit {
   unapprovedServices;
   managersList;
   allUnapprovedUsersList;
-  constructor(private racService: RACServiceService) {
+  $ : any;
+  constructor(private sanitizer:DomSanitizer, private racService: RACServiceService) {
 
   }
 
@@ -20,6 +22,10 @@ export class AdminComponent implements OnInit {
     this.loadUnapprovedServices();
     this.loadManagers();
     this.loadAllUsers();
+  }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   loadUnapprovedServices() {
@@ -51,6 +57,7 @@ export class AdminComponent implements OnInit {
     x.subscribe(
       result => {
         this.allUnapprovedUsersList = result;
+
       },
       err => {
         console.log('Problem loading unnaproved users');
@@ -66,6 +73,9 @@ export class AdminComponent implements OnInit {
 
   ApproveUser(user) {
     this.racService.approveUser(user);
+    let id = "approved_" + user.Id;
+    var button = document.getElementById(id);
+    button.hidden = true;
   }
 
   BlockManager(manager) {

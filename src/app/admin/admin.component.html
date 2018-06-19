@@ -34,12 +34,12 @@
   <ngb-tab title="Approve New Clients">
     <ng-template ngbTabContent>
       <div class="list-group" *ngFor="let user of allUnapprovedUsersList">
-        <div class="list-group-item">
+        <div id="approved_{{user.Id}}" class="list-group-item">
           <h5>Name and surname</h5>
-          <p>{{user.Name}} {{user.Surname}}</p>
-          <img src="{{user.ImagePath}}">
+          <p>{{user.Name}} {{user.Surname}} <input type="button" class="btn-primary" value="Approve" (click)="ApproveUser(user)"></p>
+          <img style="width:150px;height:100px" class="rounded float-left img-thumbnail" [src]="sanitize(user.ImagePath)">
           <br/>
-          <input type="button" class="btn-primary" value="Approve" (click)="ApproveUser(user)">
+          
         </div>
       </div>
     </ng-template>

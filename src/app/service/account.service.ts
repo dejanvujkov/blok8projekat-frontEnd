@@ -9,7 +9,6 @@ import {Global} from '../global';
   providedIn: 'root'
 })
 export class AccountService {
-  user: any;
   constructor(private client: HttpClient, private global: Global) {
   }
 
@@ -60,7 +59,8 @@ export class AccountService {
     const retVal = this.client.get(this.global.address + 'user/getUserDetails?username=' + username) as Observable<any>;
     retVal.subscribe(
       result => {
-        this.user = result;
+        this.global.user = result;
+        alert(this.global.user);
       },
       err => {
         alert('Error getting user');

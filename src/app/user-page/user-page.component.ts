@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccountService} from '../service/account.service';
 import {ImageService} from '../service/image.service';
 import {DomSanitizer} from '@angular/platform-browser';
-
+import {Global} from '../global'
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
@@ -13,7 +13,10 @@ export class UserPageComponent implements OnInit {
   user: any;
   imageUrl: string;
   fileToUpload: File = null;
-  constructor(private sanitizer:DomSanitizer, private accountService: AccountService, private imageService: ImageService)
+  constructor(private sanitizer:DomSanitizer,
+             private accountService: AccountService,
+             private imageService: ImageService,
+             private global: Global)
   {
     this.getAccountDetails();
   }
@@ -51,8 +54,6 @@ export class UserPageComponent implements OnInit {
    }
 
   getAccountDetails() {
-    const username = localStorage.getItem('username');
-    this.accountService.getAccountDetails(username);
-    this.user = this.accountService.user;
+    this.user = this.global.user;
   }
 }
