@@ -15,7 +15,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ReservationService } from './service/reservation.service';
 import { UserPageComponent } from './user-page/user-page.component';
 import {Global} from './global';
-
+import {DomSanitizer} from '@angular/platform-browser';
 
 const AppRoutes: Routes = [
   {
