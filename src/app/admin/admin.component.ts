@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {RACServiceService} from '../service/racservice.service';
-import {ServiceModel} from '../model/ServiceModel';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
@@ -13,8 +12,7 @@ export class AdminComponent implements OnInit {
   unapprovedServices;
   managersList;
   allUnapprovedUsersList;
-  $ : any;
-  constructor(private sanitizer:DomSanitizer, private racService: RACServiceService) {
+  constructor(private sanitizer: DomSanitizer, private racService: RACServiceService) {
 
   }
 
@@ -24,7 +22,7 @@ export class AdminComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  sanitize(url:string){
+  sanitize(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
@@ -65,7 +63,6 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  // TODO refresh prikaza kako se stisne dugme
   ApproveService(service, i) {
     this.racService.approveService(service);
     this.unapprovedServices.removeAt(i);
@@ -73,8 +70,8 @@ export class AdminComponent implements OnInit {
 
   ApproveUser(user) {
     this.racService.approveUser(user);
-    let id = "approved_" + user.Id;
-    var button = document.getElementById(id);
+    const id = 'approved_' + user.Id;
+    const button = document.getElementById(id);
     button.hidden = true;
   }
 

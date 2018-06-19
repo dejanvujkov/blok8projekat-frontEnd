@@ -5,6 +5,7 @@ import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ReservationModel } from '../model/ReservationModel';
 import {ReservationService} from '../service/reservation.service';
+import {Global} from '../global';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
@@ -52,7 +53,7 @@ export class ServiceDetailComponent implements OnInit {
   selectedBranchOfficeFromId: number;
   selectedBranchOfficeToId: number;
 
-  constructor(private reservationService: ReservationService, private racService: RACServiceService, private router: Router, private activatedRoute: ActivatedRoute, private calendar: NgbCalendar) {
+  constructor(private reservationService: ReservationService, private racService: RACServiceService, private router: Router, private activatedRoute: ActivatedRoute, private calendar: NgbCalendar, private global: Global) {
     activatedRoute.params.subscribe(params => {this.Id = params['Id']; });
     this.getService(this.Id);
     this.fromDate = calendar.getToday();
@@ -75,6 +76,10 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   onVehicleListItemClick(i: number, list ) {
+    if (this.global.user.AppUser.ImagePath != null || this.global.user.AppUser.Approved == 'false') {
+      alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
+      return;
+    }
     (list.children[i] as HTMLDivElement).style.background = 'LightBlue';
     for (const child of list.children) {
       if (child !== list.children[i]) {
@@ -86,8 +91,12 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   onBranchOfficeFromListItemClick(i: number, list) {
+    if (this.global.user.AppUser.ImagePath != null || this.global.user.AppUser.Approved == 'false') {
+      alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
+      return;
+    }
     (list.children[i] as HTMLDivElement).style.background = 'LightBlue';
-    for( const child of list.children) {
+    for ( const child of list.children) {
       if (child !== list.children[i]) {
         child.style.background = '';
       }
@@ -97,7 +106,10 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   onBranchOfficeToListItemClick(i: number, list) {
-    console.log('aaaa: ' +  (list.children[i] as HTMLDivElement).style.background);
+    if (this.global.user.AppUser.ImagePath != null || this.global.user.AppUser.Approved == 'false') {
+      alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
+      return;
+    }
     (list.children[i] as HTMLDivElement).style.background = 'LightBlue';
     for (const child of list.children) {
       if (child !== list.children[i]) {
@@ -129,7 +141,10 @@ export class ServiceDetailComponent implements OnInit {
   isTo = date => equals(date, this.toDate);
 
   makeReservation() {
-
+    if (this.global.user.AppUser.ImagePath != null || this.global.user.AppUser.Approved == 'false') {
+      alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
+      return;
+    }
     const reservation: ReservationModel = new ReservationModel();
     reservation.ServiceId = this.Service.Id;
     reservation.ReturnBranchOfficeId = this.selectedBranchOfficeToId;

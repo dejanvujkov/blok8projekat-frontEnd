@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {LoginModel} from '../model/LoginModel';
 import {NgForm} from '@angular/forms';
 import {AccountService} from '../service/account.service';
-// import {AppUserMethodResult} from '../model/AppUserMethodResult';
 
 @Component({
   selector: 'app-login',

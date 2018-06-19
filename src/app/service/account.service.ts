@@ -29,6 +29,7 @@ export class AccountService {
           localStorage.setItem('jwt', jwt);
           localStorage.setItem('role', role);
           localStorage.setItem('username', username);
+          this.getAccountDetails(username);
           return decodedJwt;
         },
         error1 => {
