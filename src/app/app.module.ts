@@ -16,6 +16,8 @@ import { ReservationService } from './service/reservation.service';
 import { UserPageComponent } from './user-page/user-page.component';
 import {Global} from './global';
 import {DomSanitizer} from '@angular/platform-browser';
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './map/map.component';
 
 const AppRoutes: Routes = [
   {
@@ -53,6 +55,7 @@ const AppRoutes: Routes = [
     ServiceDetailComponent,
     AdminComponent,
     UserPageComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ const AppRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientXsrfModule
+    HttpClientXsrfModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
   providers: [ReservationService, AccountService, RacserviceComponent, Global],
   bootstrap: [AppComponent],

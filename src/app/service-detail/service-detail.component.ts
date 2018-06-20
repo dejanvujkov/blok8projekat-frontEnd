@@ -6,6 +6,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { ReservationModel } from '../model/ReservationModel';
 import {ReservationService} from '../service/reservation.service';
 import {Global} from '../global';
+import { MapInfo } from '../model/MapInfo';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;

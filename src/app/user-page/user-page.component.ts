@@ -40,11 +40,11 @@ export class UserPageComponent implements OnInit {
   }
 
   OnUploadImageSubmit(Image, user){
-    this.imageService.postFile(this.fileToUpload, user).subscribe(
+    console.log("slika: " + Image);
+    this.imageService.postFile(this.fileToUpload, user.AppUser.Id).subscribe(
       data =>{
         console.log('done');
-        //Image.value = null;
-        //this.imageUrl = "/assets/img/default-image.png";
+        user.AppUser.ImagePath = data;
       },
       err =>{
         console.log('err in uploadImg');
