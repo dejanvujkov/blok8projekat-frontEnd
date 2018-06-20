@@ -13,7 +13,7 @@
     <p>Email: {{Service?.Email}}</p>
   </div>
   <div class="modal-body row">
-    <div class="col-md-4" >
+    <div class="col-md-6" >
       <h4 style="text-align: center">Vehicles</h4>
       <div #vehicleList class="list-group" >
         <a  (click)="onVehicleListItemClick(i, vehicleList)"  *ngFor="let vehicle of Service?.Vehicles; index as i" class="list-group-item list-group-item-action">
@@ -26,6 +26,7 @@
         </a>
       </div>
     </div>
+    <!--
     <div class="col-md-offset-2 col-md-4" >
       <h4 style="text-align: center">Take vehicle at</h4>
       <div #branchOficeListFrom class="list-group" >
@@ -48,6 +49,10 @@
         </a>
       </div>
     </div>
+  -->
+    
+    <app-map [branchOffices]="Service?.Offices">
+    </app-map>
   </div>
 
   <div [hidden]="isUserLoggedIn()">

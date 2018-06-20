@@ -5,7 +5,7 @@
   <p>Email: {{user?.Email}}</p>
   <p>Approved: {{user?.AppUser.Approved}}</p>
   <div>
-    <form #uploadImageForm=ngForm (ngSubmit)="OnUploadImageSubmit(Image, user.AppUser.Id)">
+    <form #uploadImageForm=ngForm (ngSubmit)="OnUploadImageSubmit(Image, user)">
       <img class="rounded float-left img-thumbnail" alt="Upload image!" [src]="sanitize(user.AppUser.ImagePath)"  style="width:250px;height:200px">
         <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
         <button type="submit" class="btn-large btn-submit" [disabled]="Image.value==''">Submit</button>

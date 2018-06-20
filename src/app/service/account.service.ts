@@ -61,7 +61,7 @@ export class AccountService {
     retVal.subscribe(
       result => {
         this.global.user = result;
-        alert(this.global.user);
+        //alert(this.global.user);
       },
       err => {
         alert('Error getting user');
