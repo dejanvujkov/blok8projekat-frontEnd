@@ -63,9 +63,11 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  ApproveService(service, i) {
+  ApproveService(service) {
     this.racService.approveService(service);
-    this.unapprovedServices.removeAt(i);
+    const id = 'service_' + service.Id;
+    const div = document.getElementById(id);
+    div.hidden = true;
   }
 
   ApproveUser(user) {
@@ -77,5 +79,8 @@ export class AdminComponent implements OnInit {
 
   BlockManager(manager) {
     this.racService.blockManager(manager.AppUser);
+    const id = 'manager_' + manager.Id;
+    const div = document.getElementById(id);
+    div.hidden = true;
   }
 }

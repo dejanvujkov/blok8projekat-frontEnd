@@ -1,12 +1,12 @@
 <ngb-tabset [justify]="currentJustify">
   <ngb-tab title="Approve New Service">
     <ng-template ngbTabContent>
-      <div class="list-group" *ngFor="let service of unapprovedServices; index as i">
-        <div class="list-group-item">
+      <div class="list-group" *ngFor="let service of unapprovedServices">
+        <div class="list-group-item" id="service_{{service.Id}}">
           <h5>{{service?.Name}}</h5>
           <small>{{service?.Description}}</small>
           <br/>
-          <input type="submit" value="Approve" class="btn-primary" (click)="ApproveService(service, i)">
+          <input type="submit" value="Approve" class="btn-primary" (click)="ApproveService(service)">
         </div>
       </div>
     </ng-template>
@@ -14,7 +14,7 @@
   <ngb-tab title="List of Managers">
     <ng-template ngbTabContent>
       <div class="list-group" *ngFor="let manager of managersList;">
-        <div class="list-group-item">
+        <div class="list-group-item" id="manager_{{manager.Id}}">
           <h5>{{manager?.UserName}}</h5>
           <p>
             {{manager?.AppUser.Name}} {{manager?.AppUser.Surname}}
@@ -39,7 +39,7 @@
           <p>{{user.Name}} {{user.Surname}} <input type="button" class="btn-primary" value="Approve" (click)="ApproveUser(user)"></p>
           <img style="width:150px;height:100px" class="rounded float-left img-thumbnail" [src]="sanitize(user.ImagePath)">
           <br/>
-          
+
         </div>
       </div>
     </ng-template>
