@@ -25,6 +25,9 @@ export class AppComponent {
   isLoggedUserAdmin() {
     return localStorage.role === 'Admin';
   }
+  isLoggedUserManager() {
+    return localStorage.role === 'Manager';
+  }
 
   logout() {
     localStorage.removeItem('jwt');

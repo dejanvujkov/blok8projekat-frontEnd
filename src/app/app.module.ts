@@ -18,6 +18,7 @@ import {Global} from './global';
 import {DomSanitizer} from '@angular/platform-browser';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
+import { ManagerComponent } from './manager/manager.component';
 
 const AppRoutes: Routes = [
   {
@@ -43,6 +44,10 @@ const AppRoutes: Routes = [
   {
     path: 'adminPage',
     component: AdminComponent
+  },
+  {
+    path: 'newService',
+    component: ManagerComponent
   }
 ];
 
@@ -56,6 +61,7 @@ const AppRoutes: Routes = [
     AdminComponent,
     UserPageComponent,
     MapComponent,
+    ManagerComponent,
   ],
   imports: [
     BrowserModule,

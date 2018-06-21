@@ -4,6 +4,7 @@
       <a [routerLink]="['/']" class="navbar-brand">Rent-a-car <span class="sr-only">(current)</span></a>
       <a [routerLink]="['/services']" class="navbar-brand">Services</a>
       <a [routerLink]="['/adminPage']" class="navbar-brand" [hidden]="!isLoggedUserAdmin()">Admin Page</a>
+      <a [routerLink]="['/newService']" class="navbar-brand" [hidden]="!isLoggedUserManager()">Add new Service</a>
       <a [routerLink]="['/account']" class="navbar-brand" [hidden]="!userLoggedIn()">Account</a>
     </div>
 
