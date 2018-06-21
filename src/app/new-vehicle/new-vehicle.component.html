@@ -1,0 +1,32 @@
+<br/>
+<div class="container col-md-4">
+  <div class="page-header">
+    <h1 style="text-align: center">Adding new Vehicle</h1>
+    <hr/>
+  </div>
+  <br/>
+  <form #newServiceForm="ngForm" (ngSubmit)="AddNewVehicle(newServiceForm.value, newServiceForm)">
+    <div class="form-group">
+      <input type="text" placeholder="Model of Vehicle" name="Model" ngModel class="form-control" ngbTooltip="Enter model" placement="right">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Manufacturer" name="Manufacturer" ngModel class="form-control" ngbTooltip="Enter manufacturer" placement="right">
+    </div>
+    <div class="form-group">
+      <input type="number" placeholder="Year of production" name="Year" ngModel class="form-control" ngbTooltip="Enter year of production of vehicle" placement="right">
+    </div>
+    <div class="form-group">
+      <input type="number" placeholder="Price per hour" name="Price" ngModel class="form-control" ngbTooltip="Enter price per hour" placement="right">
+    </div>
+    <div class="form-group">
+      <textarea placeholder="Description" ngbTooltip="Enter description" name="Description" ngModel ngModel="{{newVehicle?.Description}}" placement="right" class="form-control"></textarea>
+    </div>
+    <div class="form-control">
+      <input type="file" #Image accept="image/*" ngModel="{{newVehicle?.ImagePath}}" name="ImagePath" ngModel (change)="handleFileInput($event.target.files)">
+    </div>
+    <div>
+      <br/>
+      <input type="submit" value="Add new vehicle" class="btn-primary">
+    </div>
+  </form>
+</div>

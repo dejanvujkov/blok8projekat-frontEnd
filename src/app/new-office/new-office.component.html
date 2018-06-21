@@ -1,0 +1,26 @@
+<br/>
+<div class="container col-md-4">
+  <div class="page-header">
+    <h1 style="text-align: center">Adding new Vehicle</h1>
+    <hr/>
+  </div>
+  <br/>
+  <form #newServiceForm="ngForm" (ngSubmit)="AddNewOffice(newServiceForm.value, newServiceForm)">
+    <div class="form-group">
+      <input type="text" placeholder="Address" name="Address" ngModel class="form-control" ngbTooltip="Enter model" placement="right">
+    </div>
+    <div class="form-group">
+      <input type="number" placeholder="Longitude" name="Longitude" ngModel class="form-control" ngbTooltip="Enter manufacturer" placement="right">
+    </div>
+    <div class="form-group">
+      <input type="number" placeholder="Latitude" name="Latitude" ngModel class="form-control" ngbTooltip="Enter year of production of vehicle" placement="right">
+    </div>
+    <div class="form-control">
+      <input type="file" #Image accept="image/*"  name="ImagePath" ngModel (change)="handleFileInput($event.target.files)">
+    </div>
+    <div>
+      <br/>
+      <input type="submit" value="Add new office" class="btn-primary">
+    </div>
+  </form>
+</div>

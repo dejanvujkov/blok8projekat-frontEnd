@@ -19,6 +19,9 @@ import {DomSanitizer} from '@angular/platform-browser';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 import { ManagerComponent } from './manager/manager.component';
+import { MyServicesComponent } from './my-services/my-services.component';
+import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
+import { NewOfficeComponent } from './new-office/new-office.component';
 import { TokenInterceptor } from './interseptor/httpInterceptor.interceptor';
 
 const AppRoutes: Routes = [
@@ -49,6 +52,18 @@ const AppRoutes: Routes = [
   {
     path: 'newService',
     component: ManagerComponent
+  },
+  {
+    path: 'myServices',
+    component: MyServicesComponent
+  },
+  {
+    path: 'myServices/:id/newVehicle',
+    component: NewVehicleComponent
+  },
+  {
+    path: 'myServices/:id/newOffice',
+    component: NewOfficeComponent
   }
 ];
 
@@ -63,6 +78,9 @@ const AppRoutes: Routes = [
     UserPageComponent,
     MapComponent,
     ManagerComponent,
+    MyServicesComponent,
+    NewVehicleComponent,
+    NewOfficeComponent,
   ],
   imports: [
     BrowserModule,

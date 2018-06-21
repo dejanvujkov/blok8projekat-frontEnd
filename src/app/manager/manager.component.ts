@@ -25,7 +25,7 @@ export class ManagerComponent implements OnInit {
       this.imageUrl = event.target.result;
     };
     reader.readAsDataURL(this.fileToUpload);
-}
+  }
 
   AddNewService(value: ServiceModel, form) {
     this.rac.addNewService(value, this.fileToUpload);

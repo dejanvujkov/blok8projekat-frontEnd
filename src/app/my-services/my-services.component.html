@@ -1,0 +1,26 @@
+<br/>
+<div class="container col-md-4">
+  <div class="page-header">
+    <h1 style="text-align: center">My Services</h1>
+    <br/>
+  </div>
+  <div class="list-group" *ngFor="let service of myServices">
+    <tr>
+      <td>
+        <img style="width: 150px; height: 100px;" [src]=sanitize(service?.ImagePath)>
+      </td>
+      <td>
+        <h5>{{service?.Name}}</h5>
+        <p class="mb-1">{{service?.Description}}</p>
+      </td>
+      <td style="width: 50px"></td>
+      <td>
+        <input [routerLink]="['/myServices/' + service.Id + '/newVehicle']" class="btn-default" type="button" value="Add Vehicles" style="width: 100px">
+        <br/>
+        <br/>
+        <input [routerLink]="['/myServices/' + service.Id + '/newOffice']" class="btn-default" type="button" value="Add Offices" style="width: 100px">
+      </td>
+    </tr>
+    <hr/>
+  </div>
+</div>

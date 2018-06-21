@@ -5,6 +5,7 @@
       <a [routerLink]="['/services']" class="navbar-brand">Services</a>
       <a [routerLink]="['/adminPage']" class="navbar-brand" [hidden]="!isLoggedUserAdmin()">Admin Page</a>
       <a [routerLink]="['/newService']" class="navbar-brand" [hidden]="!isLoggedUserManager()">Add new Service</a>
+      <a [routerLink]="['/myServices']" class="navbar-brand" [hidden]="!isLoggedUserManager()">My Services</a>
       <a [routerLink]="['/account']" class="navbar-brand" [hidden]="!userLoggedIn()">Account</a>
     </div>
 
