@@ -7,6 +7,7 @@ import { ReservationModel } from '../model/ReservationModel';
 import {ReservationService} from '../service/reservation.service';
 import {Global} from '../global';
 import { MapInfo } from '../model/MapInfo';
+import {DomSanitizer} from '@angular/platform-browser';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
@@ -45,23 +46,75 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
 export class ServiceDetailComponent implements OnInit {
 
   Service: any;
+  offices: Array<MapInfo> = new Array<MapInfo>();
   Id: number;
 
   fromDate: NgbDateStruct;
   toDate: NgbDateStruct;
   hoveredDate: NgbDateStruct;
-  selectedVehicleId: number;
-  selectedBranchOfficeFromId: number;
-  selectedBranchOfficeToId: number;
+  selectedVehicleId: number = -1;
+  selectedBranchOfficeFromId: number = -1;
+  selectedBranchOfficeToId: number = -1;
+  address1 = "aaaa";
+  address2 = "aaaa";
 
-  constructor(private reservationService: ReservationService, private racService: RACServiceService, private router: Router, private activatedRoute: ActivatedRoute, private calendar: NgbCalendar, private global: Global) {
+  constructor(private sanitizer:DomSanitizer, private reservationService: ReservationService, private racService: RACServiceService, private router: Router, private activatedRoute: ActivatedRoute, private calendar: NgbCalendar, private global: Global) {
     activatedRoute.params.subscribe(params => {this.Id = params['Id']; });
     this.getService(this.Id);
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+
   }
 
   ngOnInit() {
+  }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  registerTakeChangedEvent($event){
+    this.selectedBranchOfficeFromId = $event;
+    console.log("event-take: " + this.selectedBranchOfficeFromId);
+    if(this.selectedBranchOfficeFromId == -1){
+      this.address1 = "";
+      var x = document.getElementById("b1").hidden = true;
+    }
+    this.Service.Offices.forEach(office => {
+      if(office.Id == this.selectedBranchOfficeFromId){
+        this.address1 = office.Address;
+        var x = document.getElementById("b1").hidden = false;
+        return;
+      }
+    });
+  }
+
+  registerReturnChangedEvent($event){
+    this.selectedBranchOfficeToId = $event;
+    console.log("event-ret: " + this.selectedBranchOfficeToId);
+    if(this.selectedBranchOfficeToId == -1){
+      this.address2 = "";
+      var x = document.getElementById("b2").hidden = true;
+    }
+    this.Service.Offices.forEach(office => {
+      if(office.Id == this.selectedBranchOfficeToId){
+        this.address2 = office.Address;
+        var x = document.getElementById("b2").hidden = false;
+        return;
+      }
+    });
+  }
+
+  deleteSelectedTakeOffice(){
+    this.selectedBranchOfficeFromId = -1;
+    this.address1="";
+    var x = document.getElementById("b1").hidden = true;
+  }
+
+  deleteSelectedReturnOffice(){
+    this.selectedBranchOfficeToId = -1; 
+    this.address2="";  
+    var x = document.getElementById("b2").hidden = true;
   }
 
   getService(id: number) {
@@ -69,6 +122,9 @@ export class ServiceDetailComponent implements OnInit {
     x.subscribe(
       result => {
         this.Service = result;
+        this.Service.Offices.forEach(office => {
+          this.offices.push(new MapInfo(office.Id, office.Latitude, office.Longitude, "", office.Address, ""));
+        });
       },
       err => {
         console.log('Error getting service');
@@ -77,7 +133,7 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   onVehicleListItemClick(i: number, list ) {
-    if (this.global.user.AppUser.ImagePath != null || this.global.user.AppUser.Approved == 'false') {
+    if (this.global.user.AppUser.ImagePath == null || this.global.user.AppUser.Approved == 'false') {
       alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
       return;
     }
@@ -90,7 +146,7 @@ export class ServiceDetailComponent implements OnInit {
 
     this.selectedVehicleId = this.Service.Vehicles[i].Id;
   }
-
+  /*
   onBranchOfficeFromListItemClick(i: number, list) {
     if (this.global.user.AppUser.ImagePath != null || this.global.user.AppUser.Approved == 'false') {
       alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
@@ -119,7 +175,7 @@ export class ServiceDetailComponent implements OnInit {
     }
 
     this.selectedBranchOfficeToId = this.Service.Offices[i].Id;
-  }
+  }*/
 
   isUserLoggedIn() {
     return !localStorage.jwt;
@@ -142,10 +198,15 @@ export class ServiceDetailComponent implements OnInit {
   isTo = date => equals(date, this.toDate);
 
   makeReservation() {
-    if (this.global.user.AppUser.ImagePath != null || this.global.user.AppUser.Approved == 'false') {
+    if (this.global.user.AppUser.ImagePath == null || this.global.user.AppUser.Approved == 'false') {
       alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
       return;
     }
+    if(this.selectedVehicleId == -1 || this.selectedBranchOfficeToId == -1 ||
+       this.selectedBranchOfficeFromId == -1 || this.toDate==null || this.fromDate==null){
+         alert("Niste popunili sve podatke potrebne za rezervaciju");
+         return;
+       }
     const reservation: ReservationModel = new ReservationModel();
     reservation.ServiceId = this.Service.Id;
     reservation.ReturnBranchOfficeId = this.selectedBranchOfficeToId;

@@ -6,8 +6,15 @@
   </div>
   <div class="list-group" *ngFor="let service of allServices">
     <a [routerLink]="['/services/' + service?.Id]" class="list-group-item list-group-item-action flex-column align-items-start-active">
-      <h5>{{service?.Name}}</h5>
-      <p class="mb-1">{{service?.Description}}</p>
+      <tr>
+          <td>
+            <img style="width: 150px; height: 100px;" [src]=sanitize(service?.ImagePath)>
+          </td>
+          <td>
+            <h5>{{service?.Name}}</h5>
+            <p class="mb-1">{{service?.Description}}</p>
+          </td> 
+      </tr> 
     </a>
   </div>
 </div>

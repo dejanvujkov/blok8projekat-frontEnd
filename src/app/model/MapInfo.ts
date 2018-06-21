@@ -3,16 +3,16 @@ export class MapInfo {
     iconUrl: string;
     title: string;
     label: string;
-    centerLat: number;
-    centerLong: number;
-    link: string;
+    Lat: number;
+    Lng: number;
+    id: number;
 
-    constructor(lat: number, long: number, icon: string, title:string, label:string, link: string){
+    constructor(id:number, lat: number, long: number, icon: string, title:string, label:string){
         this.iconUrl = icon;
         this.title = title;
         this.label = label;
-        this.centerLat = lat;
-        this.centerLong = long;
-        this.link = link;
+        this.Lat = lat;
+        this.Lng = long;
+        this.id = id;
     }
 } 

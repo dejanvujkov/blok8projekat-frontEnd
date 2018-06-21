@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
+import {DomSanitizer} from '@angular/platform-browser';
 import {RACServiceService} from '../service/racservice.service';
 import {ServiceModel} from '../model/ServiceModel';
 
@@ -11,13 +11,17 @@ import {ServiceModel} from '../model/ServiceModel';
   styleUrls: ['./racservice.component.css']
 })
 export class RacserviceComponent implements OnInit {
-  constructor(private racService: RACServiceService) {
+  constructor(private sanitizer:DomSanitizer, private racService: RACServiceService) {
     this.getAllRACServices();
   }
   allServices;
 
   ngOnInit() {
 
+  }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   getAllRACServices() {

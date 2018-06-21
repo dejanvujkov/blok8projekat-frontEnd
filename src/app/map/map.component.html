@@ -3,18 +3,16 @@
   
   <!-- Kreiramo mapu -->
   <agm-map [latitude]="45.267136" [longitude]="19.833549" [zoom]="18" (mapClick)="placeMarker($event)">
-   
     <!-- Postavljamo markere -->
-    <agm-marker *ngFor="let office of branchOffices; index as i" (markerClick)="markerClick(office.Id)" [latitude]="office.Latitude" [longitude]="office.Longitude" [title]="office.Address"
-    [label]="office.Address">
-
+    <agm-marker #marker *ngFor="let office of offices; index as i" (markerClick)="markerClick(office, marker)" [latitude]="office.Lat" [longitude]="office.Lng" [title]="office.title"
+    [iconUrl]="office.iconUrl" [label]="office.label">
       <!-- Svakom markeru dodajemo info-window (Nije obavezno!)-->
-      <agm-info-window [latitude]="office.Latitude" [longitude]="office.Longitude" >
-        <!-- U info-window stavljamo html -->
-        <span style="font-size: 16px;font-family:'Times New Roman'">{{office.Address}}</span>
-        <br/>
-        <span style="font-family:'Times New Roman'; color:gray;"><strong>Jugodrvo</strong></span>
-        <span style="font-family:'Times New Roman'; color:gray;">Bulevar oslobođenja 131</span>
+      <agm-info-window [latitude]="office.Lat" [longitude]="office.Lng" >  
+        <h6 style="font-family:'Times New Roman'; color:mediumseagreen">{{office.title}}</h6>     
+        <div>
+          <button *ngIf="isTakeVisible()" (click)="onTakeClick(office.id)" class="btn-sm btn-info">Take here</button>
+          <button *ngIf="isReturnVisible()" (click)="onReturnClick(office.id)" class="btn-sm btn-info">Return here</button>
+        </div>
       </agm-info-window>
     </agm-marker>
   </agm-map>

@@ -18,7 +18,7 @@
       <div #vehicleList class="list-group" >
         <a  (click)="onVehicleListItemClick(i, vehicleList)"  *ngFor="let vehicle of Service?.Vehicles; index as i" class="list-group-item list-group-item-action">
           <div class="d-flex w-100 justify-content-between">
-            <img style="max-height: 80px; max-width: 80px" [src]=vehicle?.ImagePath>
+            <img style="max-height: 80px; max-width: 80px" [src]=sanitize(vehicle?.ImagePath)>
             <h6>{{vehicle?.Type}} {{vehicle?.Manifacturer}} {{vehicle?.Model}} {{vehicle?.ProductionYear}}</h6>
             <small style="color:green">{{vehicle?.Price}}$</small>
           </div>
@@ -50,9 +50,12 @@
       </div>
     </div>
   -->
-    
-    <app-map [branchOffices]="Service?.Offices">
-    </app-map>
+    <div class="col-md-6">
+      <app-map [take]="selectedBranchOfficeFromId" [return]="selectedBranchOfficeToId" (takeChangedEvent)="registerTakeChangedEvent($event)" (returnChangedEvent)="registerReturnChangedEvent($event)" [offices]="offices">
+      </app-map>
+      <div><button hidden id="b1" (click)="deleteSelectedTakeOffice()" class="btn btn-sm btn-info">Delete</button><b> Take vehicle at {{address1}}</b></div>
+      <div><button hidden id="b2" (click)="deleteSelectedReturnOffice()"  class="btn btn-sm btn-info">Delete</button><b> Return vehicle at {{address2}}</b></div>
+    </div>
   </div>
 
   <div [hidden]="isUserLoggedIn()">
