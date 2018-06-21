@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AccountService} from './service/account.service';
-import {Global} from "../app/global";
+import {Global} from '../app/global';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,9 @@ import {Global} from "../app/global";
 })
 export class AppComponent {
 
-  constructor(private acc: AccountService, private global : Global) {
-    let username = localStorage.getItem('username');
-    if(username){
+  constructor(private acc: AccountService, private global: Global) {
+    const username = localStorage.getItem('username');
+    if (username) {
       global.user = acc.getAccountDetails(username);
     }
   }
@@ -36,6 +36,4 @@ export class AppComponent {
     this.acc.Logout(this.global.user);
     this.global.user = null;
   }
-
-  
 }

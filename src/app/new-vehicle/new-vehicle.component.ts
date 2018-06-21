@@ -13,7 +13,9 @@ export class NewVehicleComponent implements OnInit {
   imageUrl: string;
   serviceId: number;
   constructor(private activatedRoute: ActivatedRoute, private rac: RACServiceService) {
-    this.serviceId = activatedRoute.url.value[1].path;
+    this.activatedRoute.params.subscribe(params => {
+      this.serviceId = params['id'];
+    });
   }
 
   ngOnInit() {

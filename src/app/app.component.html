@@ -16,8 +16,6 @@
     <ul class="nav navbar-nav" [hidden]="!userLoggedIn()">
       <li><a [routerLink]="['/']" class="nav navbar-nav" (click)="logout()">Logout</a></li>
     </ul>
-
   </div>
 </nav>
-
 <router-outlet></router-outlet>

@@ -14,7 +14,9 @@ export class NewOfficeComponent implements OnInit {
   imageUrl: string;
   serviceId: number;
   constructor(private rac: RACServiceService, private activatedRoute: ActivatedRoute) {
-    this.serviceId = activatedRoute.url.value[1].path;
+    this.activatedRoute.params.subscribe(params => {
+      this.serviceId = params['id'];
+    });
   }
 
   ngOnInit() {
