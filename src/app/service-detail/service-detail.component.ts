@@ -58,6 +58,8 @@ export class ServiceDetailComponent implements OnInit {
   address1 = "aaaa";
   address2 = "aaaa";
 
+  infoMessage: Array<string> = null;
+
   constructor(private sanitizer:DomSanitizer, private reservationService: ReservationService, private racService: RACServiceService, private router: Router, private activatedRoute: ActivatedRoute, private calendar: NgbCalendar, private global: Global) {
     activatedRoute.params.subscribe(params => {this.Id = params['Id']; });
     this.getService(this.Id);
@@ -219,7 +221,20 @@ export class ServiceDetailComponent implements OnInit {
     const retVal = this.reservationService.addReservation(reservation);
     retVal.subscribe(
       result => {
-        alert('Success reservation');
+        if(result == null){
+          alert('Success reservation');
+          this.infoMessage = null;
+        }else{
+          this.infoMessage = new Array<string>();
+          let message: string;
+          result.forEach(date => {
+            message = date.Start.split("T")[0] + " - " + date.End.split("T")[0];          
+            this.infoMessage.push(message);
+          });
+          alert(message);
+          console.log(result);
+          
+        }
       },
       err => {
         alert('Can\'t make a reservation');

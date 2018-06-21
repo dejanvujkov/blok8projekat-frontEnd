@@ -7,7 +7,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AccountService} from './service/account.service';
-import { HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { RacserviceComponent } from './racservice/racservice.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
@@ -19,6 +19,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 import { ManagerComponent } from './manager/manager.component';
+import { TokenInterceptor } from './interseptor/httpInterceptor.interceptor';
 
 const AppRoutes: Routes = [
   {
@@ -73,7 +74,17 @@ const AppRoutes: Routes = [
     HttpClientXsrfModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [ReservationService, AccountService, RacserviceComponent, Global],
+  providers: [
+    ReservationService,
+    AccountService,
+    RacserviceComponent,
+    Global,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

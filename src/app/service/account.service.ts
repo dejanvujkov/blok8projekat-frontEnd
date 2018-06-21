@@ -72,8 +72,8 @@ export class AccountService {
   Logout(user) {
     let header = new HttpHeaders();
     header = header.append('Content-type', 'application/json');
-    // TODO sta se ovde prosledjuje kao parametar?
-    const retVal = this.client.post(this.global.address + 'api/Account/Logout', user);
+    // TODO sta se ovde prosledjuje kao parametar? nema potrebe za ovim, tako kaze msdn
+    /*const retVal = this.client.post(this.global.address + 'api/Account/Logout', user);
     retVal.subscribe(
       result => {
         return result;
@@ -81,6 +81,6 @@ export class AccountService {
       err => {
         alert('Error during logging out');
       }
-    );
+    );*/
   }
 }

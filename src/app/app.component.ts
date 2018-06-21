@@ -36,4 +36,6 @@ export class AppComponent {
     this.acc.Logout(this.global.user);
     this.global.user = null;
   }
+
+  
 }

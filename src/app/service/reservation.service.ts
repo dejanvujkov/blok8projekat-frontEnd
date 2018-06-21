@@ -7,8 +7,8 @@ import {Global} from '../global';
 @Injectable({
   providedIn: 'root'
 })
-export class ReservationService {
-
+export class ReservationService { 
+  
   constructor(private httpClient: HttpClient, private global: Global) {}
 
   addReservation(reservation: ReservationModel) {

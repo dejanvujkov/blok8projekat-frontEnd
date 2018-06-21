@@ -67,17 +67,21 @@
     </ngb-datepicker>
 
     <ng-template #t let-date="date" let-focused="focused">
-  <span class="custom-day"
-        [class.focused]="focused"
-        [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
-        [class.faded]="isHovered(date) || isInside(date)"
-        (mouseenter)="hoveredDate = date"
-        (mouseleave)="hoveredDate = null">
-    {{ date.day }}
-  </span>
+    <span class="custom-day"
+          [class.focused]="focused"
+          [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+          [class.faded]="isHovered(date) || isInside(date)"
+          (mouseenter)="hoveredDate = date"
+          (mouseleave)="hoveredDate = null">
+      {{ date.day }}
+    </span>
     </ng-template>
 
     <hr>
+    <div *ngIf="infoMessage!=null">
+      <p style="color:red;">This vehicle is reserved in next periods</p>
+      <p *ngFor="let message of infoMessage" style="color:red;">&nbsp;* {{message}}</p>
+    </div>
     <button type="submit" class="btn-primary" (click)="makeReservation()">Submit</button>
   </div>
 </div>
