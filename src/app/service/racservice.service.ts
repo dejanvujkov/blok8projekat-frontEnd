@@ -27,6 +27,25 @@ export class RACServiceService {
     return this.client.get(this.global.address + 'user/getAllUnapproved') as Observable<any>;
   }
 
+  getComments(serviceId : number){
+    return this.client.get(this.global.address+'comment/get?serviceId='+serviceId);
+  }
+
+  rateService(serviceId: number, rate: number){
+    return this.client.post(this.global.address + 'service/rate', {Id:serviceId, Rate:rate});  
+  }
+
+  sendComment(text: string, sid: number){
+    let obj = {
+      Content: text,
+      RAIdentityUserId: this.global.user.Id,
+      ServiceId: sid
+    }
+    let header = new HttpHeaders();
+    header = header.append('Content-type', 'application/json');
+    return this.client.post(this.global.address+"comment/add", obj);
+  }
+
   approveUser(user) {
     let header = new HttpHeaders();
     header = header.append('Content-type', 'application/json');

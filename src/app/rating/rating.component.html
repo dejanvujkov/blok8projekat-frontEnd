@@ -1,0 +1,3 @@
+<ngb-rating (click)="rateClick()" [(rate)]="selected" (hover)="hovered=$event" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
+<pre *ngIf="selected==0">Please rate us!</pre>
+<pre *ngIf="selected!=0">Thanks for rate!</pre>

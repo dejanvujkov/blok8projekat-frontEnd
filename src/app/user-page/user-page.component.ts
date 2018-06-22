@@ -34,7 +34,7 @@ export class UserPageComponent implements OnInit {
     //Show image preview
     var reader = new FileReader();
     reader.onload = (event:any) => {
-      this.imageUrl = event.target.result;
+      this.user.AppUser.ImagePath = event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
   }

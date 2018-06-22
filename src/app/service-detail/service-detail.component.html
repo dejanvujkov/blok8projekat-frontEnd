@@ -9,6 +9,8 @@
   <div class="jumbotron">
     <h1 class="display-4">{{Service?.Name}}</h1>
     <p class="lead">{{Service?.Description}}</p>
+    <ngbd-rating-events [selected]="rate" (clickEvent)="rated($event)"></ngbd-rating-events>
+    <p>Average rate: {{Service?.Rate}}</p>
     <hr class="my-4">
     <p>Email: {{Service?.Email}}</p>
   </div>
@@ -26,30 +28,7 @@
         </a>
       </div>
     </div>
-    <!--
-    <div class="col-md-offset-2 col-md-4" >
-      <h4 style="text-align: center">Take vehicle at</h4>
-      <div #branchOficeListFrom class="list-group" >
-        <a (click)="onBranchOfficeFromListItemClick(ii, branchOficeListFrom)" *ngFor="let office of Service?.Offices; index as ii" class="list-group-item list-group-item-action flex-column align-items-start-active">
-          <div class="d-flex w-100 justify-content-between">
-            <img style="max-height: 80px; max-width: 80px" src={{office?.ImagePath}}>
-            <h6>Adress: {{office?.Address}}</h6>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="col-md-offset-2 col-md-4" >
-      <h4 style="text-align: center">Return vehicle at</h4>
-      <div #branchOficeListTo class="list-group" >
-        <a (click)="onBranchOfficeToListItemClick(ii, branchOficeListTo)" *ngFor="let office of Service?.Offices; index as ii" class="list-group-item list-group-item-action flex-column align-items-start-active">
-          <div class="d-flex w-100 justify-content-between">
-            <img style="max-height: 80px; max-width: 80px" src={{office?.ImagePath}}>
-            <h6>Adress: {{office?.Address}}</h6>
-          </div>
-        </a>
-      </div>
-    </div>
-  -->
+    <!--mapa-->
     <div class="col-md-6">
       <app-map [take]="selectedBranchOfficeFromId" [return]="selectedBranchOfficeToId" (takeChangedEvent)="registerTakeChangedEvent($event)" (returnChangedEvent)="registerReturnChangedEvent($event)" [offices]="offices">
       </app-map>
@@ -84,5 +63,24 @@
     </div>
     <button type="submit" class="btn-primary" (click)="makeReservation()">Submit</button>
   </div>
+  <div class="list-group col-md-6">
+    <h5>Comments</h5><br/>
+    <div class="list-group-item" *ngFor="let comment of comments">
+      <h6>{{comment.RAIdentityUserId}}</h6><hr/>
+      <p>{{comment.Content}}</p>
+    </div>
+    <div class="form-group">
+    <form *ngIf="isUserLogged()">
+      <div class="form-group">
+        <textarea #Comment></textarea>
+      </div>
+      <div class="form-group">
+        <button (click)="sendComment(Comment)">Send comment</button>
+      </div>
+      <p style="color:darkgreen">{{commentInfoMessage}}</p>
+    </form>
+    </div>
+  </div>
+
 </div>
 

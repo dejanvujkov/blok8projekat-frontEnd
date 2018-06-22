@@ -47,6 +47,7 @@ export class ServiceDetailComponent implements OnInit {
 
   Service: any;
   offices: Array<MapInfo> = new Array<MapInfo>();
+  comments: any = null;
   Id: number;
 
   fromDate: NgbDateStruct;
@@ -55,17 +56,22 @@ export class ServiceDetailComponent implements OnInit {
   selectedVehicleId: number = -1;
   selectedBranchOfficeFromId: number = -1;
   selectedBranchOfficeToId: number = -1;
-  address1 = "aaaa";
-  address2 = "aaaa";
+  address1 = "";
+  address2 = "";
 
-  infoMessage: Array<string> = null;
+  rate = 0;
+  
+  infoMessage: Array<string>;
+  commentInfoMessage: string;
 
   constructor(private sanitizer:DomSanitizer, private reservationService: ReservationService, private racService: RACServiceService, private router: Router, private activatedRoute: ActivatedRoute, private calendar: NgbCalendar, private global: Global) {
     activatedRoute.params.subscribe(params => {this.Id = params['Id']; });
     this.getService(this.Id);
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-
+    this.getComments();
+    this.commentInfoMessage = "";
+    this.infoMessage = null;
   }
 
   ngOnInit() {
@@ -73,6 +79,56 @@ export class ServiceDetailComponent implements OnInit {
 
   sanitize(url:string){
     return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  getComments(){
+    let retVal = this.racService.getComments(this.Id);
+    retVal.subscribe(
+      data => {
+        this.comments = data;
+        console.log(data);
+      },
+      err=>{
+        console.log("err get comment");
+      }
+    );
+  }
+
+  sendComment(textarea: HTMLTextAreaElement){
+    let retVal = this.racService.sendComment(textarea.value, this.Service.Id);
+    retVal.subscribe(
+      data=>{
+        console.log("ok sedn coment");
+        this.commentInfoMessage = "Your comment is sent to server";
+        textarea.value = "";
+      },
+      err=>{
+        console.log("err send comment");
+      }
+
+    );
+  }
+
+  isUserLogged(){
+    if(localStorage.jwt){
+      return true;
+    }
+    return false;
+  }
+
+  rated($event){
+    this.rate = $event;
+    console.log("Rate: " + this.rate);
+    let retval = this.racService.rateService(this.Service.Id, this.rate);
+    retval.subscribe(
+      data=>{
+        console.log('ok rating');
+        this.Service.Rate = data;
+      },
+      err=>{
+        console.log('err in rating');
+      }
+    )
   }
 
   registerTakeChangedEvent($event){
@@ -135,6 +191,9 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   onVehicleListItemClick(i: number, list ) {
+    if(this.global.user==null){
+      return;
+    }
     if (this.global.user.AppUser.ImagePath == null || this.global.user.AppUser.Approved == 'false') {
       alert('Morate prvo da dovrsite nalog da biste mogli da rezervisete vozilo');
       return;

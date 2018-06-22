@@ -23,6 +23,7 @@ import { MyServicesComponent } from './my-services/my-services.component';
 import { NewVehicleComponent } from './new-vehicle/new-vehicle.component';
 import { NewOfficeComponent } from './new-office/new-office.component';
 import { TokenInterceptor } from './interseptor/httpInterceptor.interceptor';
+import { NgbdRatingEvents } from './rating/rating.component'
 
 const AppRoutes: Routes = [
   {
@@ -81,6 +82,7 @@ const AppRoutes: Routes = [
     MyServicesComponent,
     NewVehicleComponent,
     NewOfficeComponent,
+    NgbdRatingEvents,
   ],
   imports: [
     BrowserModule,
